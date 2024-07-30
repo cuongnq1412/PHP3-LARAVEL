@@ -103,4 +103,5 @@ class Article extends Model
         return DB::table('articles')->leftJoin('users', 'articles.author_id','=','users.id')
         ->select('*','users.name as tg_name')->where('articles.id',$id)->first();
     }
+
 }

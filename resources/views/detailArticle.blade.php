@@ -56,23 +56,25 @@
 
                         <div class="comments-area">
                             <h4>05 Comments</h4>
+                            @foreach ($dataus as $item )
+
+
                             <div class="comment-list">
                                <div class="single-comment justify-content-between d-flex">
                                   <div class="user justify-content-between d-flex">
-                                     <div class="thumb">
+                                     {{-- <div class="thumb">
                                         <img src="assets/img/comment/comment_1.png" alt="">
-                                     </div>
+                                     </div> --}}
                                      <div class="desc">
                                         <p class="comment">
-                                           Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                           Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                                {{ $item->comment }}
                                         </p>
                                         <div class="d-flex justify-content-between">
                                            <div class="d-flex align-items-center">
                                               <h5>
-                                                 <a href="#">Emilly Blunt</a>
+                                                 <a href="#">{{ $item->name }}</a>
                                               </h5>
-                                              <p class="date">December 4, 2017 at 3:12 pm </p>
+                                              <p class="date">{{ $item->created_at }} </p>
                                            </div>
                                            <div class="reply-btn">
                                               <a href="#" class="btn-reply text-uppercase">reply</a>
@@ -82,27 +84,37 @@
                                   </div>
                                </div>
                             </div>
+                            @endforeach
 
+                            <div class=" blog-pagination  d-flex">
+                                {{ $dataus->links('pagination::bootstrap-4') }} <!-- Hiển thị các liên kết phân trang -->
+                            </div>
 
                          </div>
                         <!-- From -->
+                        @if(Auth::check())
                         <div class="row">
                             <div class="col-lg-8">
-                                <form class="form-contact contact_form mb-80" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                                <form class="form-contact contact_form mb-80" action="{{ route('cmt') }}" method="post" >
+                                    @csrf
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                <input type="hidden" name="article_id" value="{{ $dulieu->id }}">
+                                                <input type="hidden" name="status_cmt" value="1">
+                                                <textarea class="form-control w-100 error" name="comment" id="message" cols="30" rows="9" ></textarea>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="form-group mt-3">
-                                        <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                                        <input type="submit" class="button button-contactForm boxed-btn" value="Send">
                                     </div>
                                 </form>
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div class="col-lg-4">
                         <!-- Section Tittle -->

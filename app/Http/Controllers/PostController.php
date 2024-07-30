@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -122,8 +123,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $query1=Comment::getcomment($id);
         $query=Article::getPostById($id);
-        return view('detailArticle',['dulieu'=>$query]);
+        return view('detailArticle',['dulieu'=>$query,'dataus'=>$query1]);
 
     }
 

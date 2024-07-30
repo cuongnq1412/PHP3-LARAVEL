@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -42,13 +43,14 @@ Route::get('/Contact',function(){
 
 
 
+
 // admin
 
 
 
 
 Route::middleware(['auth'])->group(function () {
-
+Route::post('/Comment',[CommentController::class,'addcomment'])->name('cmt');
 Route::resource('/Article',PostController::class);
 Route::resource('/Category',CategoryController::class);
 });
