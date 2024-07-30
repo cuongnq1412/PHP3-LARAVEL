@@ -67,5 +67,18 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="{{ asset('js/plugins.js')}}"></script>
     <script src="{{ asset('js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const alert = @json(session('alert'));
+
+        Swal.fire({
+            icon: alert.type,
+            title: alert.type === 'error' ? 'Oops!' : 'Success!',
+            text: alert.message,
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
 
 </html>

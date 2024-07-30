@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/',[HomeController::class, 'index']);
+Route::get('/',[HomeController::class, 'index'])->name('home')->middleware('checkuser');
 Route::get('/Categories',[CategoryController::class,'index']);
 Route::get('/Categories/{id}',[CategoryController::class,'index']);
 Route::get('/Article_detail/{id}',[PostController::class,'show']);
@@ -38,43 +39,18 @@ Route::get('/Contact',function(){
 });
 
 
-
-
-
-
-
-
-// admin
-
-
-
-
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['checkrouter'])->group(function () {
 Route::post('/Comment',[CommentController::class,'addcomment'])->name('cmt');
+Route::get('/Comment/list',[CommentController::class,'listcomments'])->name('list');
+Route::get('/User/list',[AdminUserController::class,'listusers'])->name('listusers');
+Route::post('/Upstatuscmt/{id}',[CommentController::class,'upstatuscmt'])->name('Upstatuscmt');
+Route::post('/Upstatususer/{id}',[AdminUserController::class,'Upstatususer'])->name('Upstatususer');
 Route::resource('/Article',PostController::class);
 Route::resource('/Category',CategoryController::class);
 });
 
-//test
 
-
-
-// Route::get('/checknav',function(){
-//     return view('dangnhap-r');
-// });
 Auth::routes();
 
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/checknav',function(){
-//     // return view('dangnhap-r');
-//     return '123';
-// });
 
-
-
-Route::middleware(['checkrouter'])->group(function () {
-    Route::get('/checknav', function () {
-        return view('dangnhap-r');
-    });
-});

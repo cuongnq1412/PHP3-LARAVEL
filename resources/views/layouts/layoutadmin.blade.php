@@ -209,18 +209,18 @@
 
           <!-- link -->
           <a
-            href="#"
+            href="{{ route('listusers') }}"
             class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
           >
             <i class="fad fa-shield-check text-xs mr-2"></i>
             Người dùng
           </a>
           <a
-            href="#"
+            href="{{ route('list') }}"
             class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
           >
             <i class="fad fa-shield-check text-xs mr-2"></i>
-            Tag
+            Bình Luận
           </a>
           <!-- end link -->
         </div>

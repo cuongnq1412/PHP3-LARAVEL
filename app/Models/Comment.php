@@ -18,4 +18,12 @@ class Comment extends Model
         ->paginate(5);
 
     }
+    public static function getall() {
+        return DB::table('comments')
+        ->leftJoin('users' , 'comments.user_id','=','users.id')
+        ->leftJoin('articles' , 'comments.article_id','=','articles.id')
+        ->select('comments.*' , 'users.name as name' ,'articles.title as title')
+        ->get();
+
+    }
 }
