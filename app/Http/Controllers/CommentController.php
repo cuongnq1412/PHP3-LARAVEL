@@ -21,7 +21,7 @@ class CommentController extends Controller
             'comment'=>$validatedData['comment'],
             'status_cmt'=>$validatedData['status_cmt'],
             'created_at' => now(),
-            'updated_at' => now(),
+
         ]);
         return redirect()->back();
     }

@@ -26,4 +26,9 @@ class Comment extends Model
         ->get();
 
     }
+    public static function sumcmt($id)  {
+        return DB::table('comments')->where('article_id', $id)
+        ->count('article_id');
+
+    }
 }

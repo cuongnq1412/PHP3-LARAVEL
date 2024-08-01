@@ -22,18 +22,20 @@ class CheckRouter
         if(Auth::check()){
             if(Auth::user()->role == 'admin'){
                 if(Auth::user()->status == 1){
-                    return redirect('home');
+                    return $next($request);
                 }else{
-                    return redirect('logout')->with('alert',[
-                                'type'=>'error',
-                                'message'=>' Tài khoản của bạn đã bị khóa vui lòng liên hệ 0773311371 để biết thêm chi tiết !'
-                        ]);
+                    Auth::logout();
+                    return redirect('/')->with('alert',[
+                       'type'=>'error',
+                       'message'=>' Tài khoản của bạn đã bị khóa vui lòng liên hệ 0773311371 để biết thêm chi tiết !'
+               ]);
 
                 }
             }
         }
 
 
-        return $next($request);
+        // return $next($request);
+        return redirect('login');
     }
 }

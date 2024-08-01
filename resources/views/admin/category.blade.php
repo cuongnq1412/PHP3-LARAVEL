@@ -27,6 +27,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
         </div>
     @endif
 {{-- noi dung  --}}
+ <div class="card">
 <div class="bg-gray-100 flex-1 p-6 ">
 
     <h1 class="h5"> @isset($dataid)
@@ -153,7 +154,7 @@ value="Thêm mới"
 </div>
 
 
-
+</div>
 
 @endsection
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -22,24 +23,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// user
+
+Route::middleware(['checkuser'])->group(function(){
+
+    Route::get('/',[HomeController::class, 'index'])->name('home');
+    Route::get('/Categories',[CategoryController::class,'index']);
+    Route::get('/Categories/{id}',[CategoryController::class,'index']);
+    Route::get('/Article_detail/{id}',[PostController::class,'show']);
+    Route::get('/About_us',function(){
+        return view('aboutUs');
+    });
+    Route::get('/Contact',function(){
+        return view('contact');
+    });
+    Route::get('/Search',[HomeController::class, 'search']);
 
 
 
-
-
-Route::get('/',[HomeController::class, 'index'])->name('home')->middleware('checkuser');
-Route::get('/Categories',[CategoryController::class,'index']);
-Route::get('/Categories/{id}',[CategoryController::class,'index']);
-Route::get('/Article_detail/{id}',[PostController::class,'show']);
-Route::get('/About_us',function(){
-    return view('aboutUs');
 });
-Route::get('/Contact',function(){
-    return view('contact');
-});
+// admin
 
 
 Route::middleware(['checkrouter'])->group(function () {
+Route::get('/Dashboard',[ DashboardController::class,'index' ])->name('Dashboard');
 Route::post('/Comment',[CommentController::class,'addcomment'])->name('cmt');
 Route::get('/Comment/list',[CommentController::class,'listcomments'])->name('list');
 Route::get('/User/list',[AdminUserController::class,'listusers'])->name('listusers');
@@ -48,7 +55,6 @@ Route::post('/Upstatususer/{id}',[AdminUserController::class,'Upstatususer'])->n
 Route::resource('/Article',PostController::class);
 Route::resource('/Category',CategoryController::class);
 });
-
 
 Auth::routes();
 

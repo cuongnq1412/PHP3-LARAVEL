@@ -32,6 +32,7 @@
                                 <h3>{{ $dulieu->title }}</h3>
                             </div>
                             <div class="about-prea">
+                                {{-- {{ $dulieu->id }} --}}
                                 <p class="about-pera1 mb-25"><b>{{ $dulieu->short_description	 }}</b></p>
                                 <p class="about-pera1 mb-25">{!! $dulieu->content !!}</p>
                                 <p class="about-pera1 mb-25"><i> Tác giả : {{ $dulieu->tg_name }}</i></p>
@@ -55,16 +56,16 @@
                         {{-- binh luan  --}}
 
                         <div class="comments-area">
-                            <h4>05 Comments</h4>
+                            <h4>{{ $sum }} Comments</h4>
                             @foreach ($dataus as $item )
 
 
                             <div class="comment-list">
                                <div class="single-comment justify-content-between d-flex">
                                   <div class="user justify-content-between d-flex">
-                                     {{-- <div class="thumb">
-                                        <img src="assets/img/comment/comment_1.png" alt="">
-                                     </div> --}}
+                                     <div class="thumb">
+                                        <img src="{{ asset('storage/user/user.svg') }}" alt="">
+                                     </div>
                                      <div class="desc">
                                         <p class="comment">
                                                 {{ $item->comment }}
@@ -100,8 +101,8 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                <input type="hidden" name="article_id" value="{{ $dulieu->id }}">
+                                                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                                <input type="hidden" name="article_id" value="{{$dulieu->id}}">
                                                 <input type="hidden" name="status_cmt" value="1">
                                                 <textarea class="form-control w-100 error" name="comment" id="message" cols="30" rows="9" ></textarea>
                                             </div>

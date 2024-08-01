@@ -13,6 +13,7 @@ class HomeController extends Controller
     ->select('articles.*', 'categories.name as categories_name')
     ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
     ->orderBy('articles.created_at', 'desc')
+    ->where('status',1)
     ->get();
 
     $latestArticle = $articles->first();
@@ -28,13 +29,14 @@ class HomeController extends Controller
          ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
          ->whereBetween('articles.created_at', [$startOfWeek, $endOfWeek])
          ->orderBy('articles.created_at', 'desc')
-         ->limit(4)
+         ->where('status',1)
+         ->limit(6)
          ->get();
     $getcategories=DB::table('categories')
     ->limit(6)
     ->get();
 
-    $categories = DB::table('categories')->take(5)->get();
+    $categories = DB::table('categories')->get();
 
 
 
@@ -50,5 +52,29 @@ class HomeController extends Controller
     ]);
 
 
+}
+
+    public function search (Request $request)  {
+
+
+        $request->validate([
+            'q' => 'required|string|max:255',
+        ]);
+
+
+        $keyword = $request->input('q');
+
+
+        $data = DB::table('articles')->where('title', 'like', '%' . $keyword . '%')
+        ->where('status', 1)->get();
+
+
+        if ($data->isEmpty()) {
+
+            return view('searchviews')->with('message', ' Không tìm thấy bài viết.');
+        } else {
+
+            return view('searchviews', compact('data'));
+        }
 }
 }

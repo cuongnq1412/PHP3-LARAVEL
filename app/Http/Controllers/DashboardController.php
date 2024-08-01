@@ -1,85 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Dashboard;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function index() {
+        $sumuser = DB::table('users')->count();
+        $sumnews = DB::table('articles')->count();
+        $sumviews = DB::table('articles')->sum('views');
+        $sumcmt = DB::table('comments')->count();
+        $sumctgr = DB::table('categories')->count();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $list5newsviewshot = DB::table('articles')
+        ->leftJoin('comments', 'articles.id', '=', 'comments.article_id')
+        ->select('articles.id', 'articles.title', 'articles.image_url', 'articles.views', DB::raw('COUNT(comments.id) as comments_count'))
+        ->groupBy('articles.id', 'articles.title', 'articles.image_url', 'articles.views')
+        ->orderByDesc('articles.views')
+        ->limit(5)
+        ->get();
+        $list5userhot=DB::table('users')
+        ->leftJoin('comments','users.id' ,'=','comments.user_id')
+        ->select('users.name','users.created_at', DB::raw('COUNT(comments.id) as comments_count'))
+        ->groupBy('users.name','users.created_at')
+        ->orderByDesc('comments_count')
+        ->limit(5)
+        ->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Dashboard  $dashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Dashboard $dashboard)
-    {
-        //
-    }
+       return view('admin.dashboard',
+    compact('sumuser','sumnews','sumviews','sumcmt','sumctgr','list5newsviewshot','list5userhot')
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Dashboard  $dashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Dashboard $dashboard)
-    {
-        //
-    }
+    );
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dashboard  $dashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Dashboard $dashboard)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Dashboard  $dashboard
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Dashboard $dashboard)
-    {
-        //
     }
 }

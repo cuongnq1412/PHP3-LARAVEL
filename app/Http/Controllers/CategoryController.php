@@ -70,7 +70,8 @@ class CategoryController extends Controller
             $query=DB::table('categories')->insert([
                 'name'=>$validatedData['name'],
                 'description'=>$validatedData['description'],
-                'img_category'=>'storage/categories/'.$imageName
+                'img_category'=>'storage/categories/'.$imageName,
+                'created_at'=>now()
             ]);
             if($query > 0){
                 return redirect()->back()->with('alert', [
@@ -173,7 +174,8 @@ class CategoryController extends Controller
             $query=DB::table('categories')->where('id',$id)->update([
                 'name'=>$validatedData['name'],
                 'description'=>$validatedData['description'],
-                'img_category'=>$img
+                'img_category'=>$img,
+                'updated_at'=>now()
             ]);
             if($query > 0){
                 return redirect()->back()->with('alert', [

@@ -14,6 +14,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
 
 @endpush
 @section('noidung')
+ <div class="card">
 <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
     <h1 class="h5"> Thêm bài viết</h1>
@@ -138,7 +139,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
 
 </div>
 
-
+ </div>
 @endsection
 
 @push('js')

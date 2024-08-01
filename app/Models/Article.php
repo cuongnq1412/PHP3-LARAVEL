@@ -84,7 +84,7 @@ class Article extends Model
             'articles.content',
             'articles.author_id',
             'articles.category_id',
-
+            'articles.status',
             'articles.image_url',
             'articles.views',
             'articles.created_at',
@@ -101,7 +101,7 @@ class Article extends Model
     {
         // return self::where('id', $id)->first();
         return DB::table('articles')->leftJoin('users', 'articles.author_id','=','users.id')
-        ->select('*','users.name as tg_name')->where('articles.id',$id)->first();
+        ->select('*','articles.id','users.name as tg_name')->where('articles.id',$id)->first();
     }
 
 }

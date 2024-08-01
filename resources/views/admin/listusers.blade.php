@@ -15,6 +15,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
 
 @endpush
 @section('noidung')
+ <div class="card">
 @if(session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -82,6 +83,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
     </tbody>
 </table>
 </div>
+ </div>
 @endsection
 @push('js')
 <script>

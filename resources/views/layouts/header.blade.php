@@ -114,7 +114,7 @@
                                 </li>
                                 @if(Auth::user()->role == 'admin')
                                 <li class="nav-item">
-                                    <a  href="#">{{ __('Dashboard') }}</a>
+                                    <a  href="{{ route('Dashboard') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 @endif
 
@@ -128,11 +128,15 @@
               </div>
               <div class=" col-lg-2 col-md-4">
                 <div class="header-right-btn f-right d-none d-lg-block">
-                  <i class="fas fa-search special-tag"></i>
+                    <form action="{{ url('Search') }}" method="GET" id="searchform" >
+                  <i class="fas fa-search special-tag" id="searchIcon"></i>
                   <div class="search-box">
-                    <form action="#">
-                      <input type="text" placeholder="Search" />
+                      <input type="text" name="q" placeholder="Search" />
                     </form>
+                    <script>
+                          document.getElementById('searchIcon').addEventListener('click', function() {
+                            document.getElementById('searchform').submit(); });
+                    </script>
                   </div>
                 </div>
               </div>

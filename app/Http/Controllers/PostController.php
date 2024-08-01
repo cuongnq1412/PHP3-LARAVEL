@@ -63,10 +63,10 @@ class PostController extends Controller
         ]);
 
 
-            $imageName = 'imgpost'.time().'_'
+            $imageName = 'imgpost'.time().'.'
                                 .$request->name.'.'
                                 .$request->imgpost->extension();
-            $imagePath = $request->file('imgpost')->storeAs('public/posts', $imageName);
+            $request->imgpost->storeAs('public/posts', $imageName);
 
             // Chuẩn bị dữ liệu để lưu
             $data = [
@@ -123,9 +123,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $upviews=DB::table('articles')->where('id', $id)->increment('views', 1);
+        $query2=Comment::sumcmt($id);
         $query1=Comment::getcomment($id);
         $query=Article::getPostById($id);
-        return view('detailArticle',['dulieu'=>$query,'dataus'=>$query1]);
+        return view('detailArticle',['dulieu'=>$query,'dataus'=>$query1,'sum'=>$query2]);
 
     }
 
@@ -165,6 +167,7 @@ class PostController extends Controller
         'key_content' => 'required|string|max:1000',
         'short_description' => 'required|string|max:500',
         'content' => 'required|string',
+        'status' => 'required|integer',
         'author_id' => 'required|integer|exists:users,id',
         'category_id' => 'required|integer|exists:categories,id',
 
@@ -183,8 +186,8 @@ class PostController extends Controller
         'keycontent' => $validatedData['key_content'],
         'short_description' => $validatedData['short_description'],
         'content' => $validatedData['content'],
+        'status' => $validatedData['status'],
         'author_id' => $validatedData['author_id'],
-        'views'=>'0',
         'category_id' => $validatedData['category_id'],
 
 
@@ -204,7 +207,7 @@ class PostController extends Controller
         $imageName = 'imgpost'.time().'_'
                                 .$request->name.'.'
                                 .$request->imgpost->extension();
-        $imagePath = $request->file('imgpost')->storeAs('public/posts', $imageName);
+        $request->file('imgpost')->storeAs('public/posts', $imageName);
         $data['image_url'] = 'storage/posts/' . $imageName;
 
     }else{

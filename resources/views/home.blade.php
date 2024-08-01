@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="trending-tittle">
-                <strong>Trending now</strong>
+                <strong> Thông báo </strong>
                 <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                 <div class="trending-animated">
                   <ul id="js-news" class="js-hidden">
@@ -32,11 +32,11 @@
               <!-- Trending Top -->
               <div class="trending-top mb-30">
                 <div class="trend-top-img">
-                  <img src="{{ asset($data->image_url)}}" alt="" />
+                  <img src="{{ asset($data->image_url)}}" width="300px"  alt="" />
                   <div class="trend-top-cap">
                     <span>{{ $data->categories_name }}</span>
                     <h2>
-                      <a href="{{ url("chitietbaiviet/".$data->id) }}"
+                      <a href="{{ url("Article_detail/".$data->id) }}"
                         >{{ $data->title }}</a>
                     </h2>
                   </div>
@@ -53,13 +53,15 @@
                       <div class="trend-bottom-img mb-30">
                         <img
                           src="{{ asset($item->image_url)}}"
+
+
                           alt=""
                         />
                       </div>
                       <div class="trend-bottom-cap">
                         <span class="color1">{{$item-> categories_name}}</span>
                         <h4>
-                          <a href="{{ url("chitietbaiviet/".$item->id) }}"
+                          <a href="{{ url("Article_detail/".$item->id) }}"
                             >{{ $item -> title }}</a
                           >
                         </h4>
@@ -72,25 +74,26 @@
             </div>
             <!-- Riht content -->
             <div class="col-lg-4">
-                @foreach ($data2 as $item )
+            @foreach ($data2 as $item )
 
 
               <div class="trand-right-single d-flex">
                 <div class="trand-right-img">
-                  <img src="{{ asset($item->image_url)}}" alt="" />
+                  <img src="{{ asset($item->image_url)}}" alt=""  width="100px" />
                 </div>
                 <div class="trand-right-cap">
                   <span class="color1">{{ $item -> categories_name }}</span>
                   <h4>
-                    <a href="{{ url("chitietbaiviet/".$item->id) }}"
+                    <a href="{{ url("Article_detail/".$item->id) }}"
                       >{{ $item ->title }}</a
                     >
                   </h4>
                 </div>
               </div>
               @endforeach
-
             </div>
+
+
           </div>
         </div>
       </div>
@@ -120,7 +123,7 @@
                   <div class="weekly-caption">
                     <span class="color1">{{ $item->categories_name }}</span>
                     <h4>
-                      <a href="{{ url("chitietbaiviet/".$item->id) }}">{{ $item->title }}</a>
+                      <a href="{{ url("Article_detail/".$item->id) }}">{{ $item->title }}</a>
                     </h4>
                   </div>
                 </div>
@@ -144,7 +147,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="section-tittle mb-30">
-                <h3>Recent Articles</h3>
+                <h3>  Danh mục</h3>
               </div>
             </div>
           </div>
@@ -160,7 +163,7 @@
                   <div class="what-cap">
                     <span class="color1">{{ $item ->name }}</span>
                     <h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                      <a href="{{ url("chitietbaiviet/".$item->id) }}">{{ $item->description }}</a>
+                      <a href="{{ url("Categories/".$item->id) }}">{{ $item->description }}</a>
                     </h4>
                   </div>
                 </div>

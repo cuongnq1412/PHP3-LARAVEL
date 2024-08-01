@@ -35,9 +35,7 @@
           <i class="fad fa-list-ul"></i>
         </button>
       </div>
-      <!-- end logo -->
 
-      <!-- navbar content toggle -->
       <button id="navbarToggle" class="hidden md:block md:fixed right-0 mr-6">
         <i class="fad fa-chevron-double-down"></i>
       </button>
@@ -62,7 +60,7 @@
               class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center"
             >
               <div class="w-8 h-8 overflow-hidden rounded-full">
-                <img class="w-full h-full object-cover" src="img/user.svg" />
+                <img class="w-full h-full object-cover" src="{{ asset('storage/user/user.svg') }}" />
               </div>
 
               <div class="ml-2 capitalize flex">
@@ -93,33 +91,14 @@
               <!-- end item -->
 
               <!-- item -->
-              <a
-                class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out"
-                href="#"
-              >
-                <i class="fad fa-inbox-in text-xs mr-1"></i>
-                my inbox
-              </a>
-              <!-- end item -->
 
-              <!-- item -->
-              <!-- <a
-                class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out"
-                href="#"
-              >
-                <i class="fad fa-badge-check text-xs mr-1"></i>
-                tasks
-              </a> -->
-              <!-- end item -->
-
-              <!-- item -->
-              <a
+              {{-- <a
                 class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out"
                 href="#"
               >
                 <i class="fad fa-comment-alt-dots text-xs mr-1"></i>
                 chats
-              </a>
+              </a> --}}
               <!-- end item -->
 
               <hr />
@@ -171,7 +150,7 @@
 
           <!-- link -->
           <a
-            href="./index.html"
+            href="{{ route('Dashboard') }}"
             class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500"
           >
             <i class="fad fa-chart-pie text-xs mr-2"></i>
@@ -230,15 +209,13 @@
 
       <!-- strat content -->
       <div class="bg-gray-100 flex-1 p-6 md:mt-16">
-        <div class="card">
+        {{-- <div class="card"> --}}
 
-            {{-- @section('thanhdieuhuong')
-            Đây là footer mặc định.
-            @show --}}
+
               @yield('noidung')
 
 
-        </div>
+        {{-- </div> --}}
       </div>
       <!-- end content -->
     </div>

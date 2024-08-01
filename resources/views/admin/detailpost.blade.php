@@ -14,6 +14,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
 
 @endpush
 @section('noidung')
+ <div class="card">
 <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
     <h1 class="h5"> Chỉnh sữa bài viết :</h1>
@@ -93,14 +94,20 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
 <div class="w-full flex flex-row py-2 space-x-4">
 
 <div class="w-1/2 flex flex-col py-2">
-  <label for="category_id" class="text-black font-semibold pb-1 capitalize">Tag:</label>
-  <select id="category" name="tag_id" class="p-2 border border-[#a5abb5] rounded"  required>
+  <label for="category_id" class="text-black font-semibold pb-1 capitalize"> Trạng thái :</label>
 
-    @foreach ($tags as $tag)
-    <option value="{{ $tag->id }}" {{ $tag->id == old('tag_id', $item->tag_id) ? 'selected' : '' }}>
-        {{ $tag->name }}
-    </option>
-@endforeach
+
+
+<select id="status" name="status" class="p-2 border border-[#a5abb5] rounded" required>
+
+
+
+        <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Hiện</option>
+        <option value="2" {{ $item->status == 0 ? 'selected' : '' }}>Ẩn</option>
+
+
+
+
 
   </select>
 </div>
@@ -139,7 +146,7 @@ href="{{ url('https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css')
 
 </div>
 
-
+ </div>
 @endsection
 
 @push('js')
