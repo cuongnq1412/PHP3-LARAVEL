@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Danh Mục')
 @section('Conten')
  <section class="blog_area section-padding">
         <div class="container">

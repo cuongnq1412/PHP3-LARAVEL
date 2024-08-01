@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Trang Chủ')
 @section('Conten')
 <main>
     <!-- Trending Area Start -->

@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Về AZ New')
 @section('Conten')
 <main>
     <!-- About US Start -->

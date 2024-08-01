@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Liên Hệ')
 @section('Conten')
 <section class="contact-section">
     <div class="container">

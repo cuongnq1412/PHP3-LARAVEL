@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', $dulieu->keytitle )
 @section('Conten')
 <main>
     <!-- About US Start -->
