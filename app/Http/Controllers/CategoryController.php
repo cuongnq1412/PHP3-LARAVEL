@@ -21,9 +21,9 @@ class CategoryController extends Controller
         ->groupBy('categories.id', 'categories.name')
         ->get();
         $query1 = DB::table('articles')
-        ->select('articles.id', 'articles.title','short_description','image_url' ,DB::raw('COUNT(comments.id) as total_comments'))
+        ->select('articles.id', 'articles.title','articles.created_at','short_description','image_url' ,DB::raw('COUNT(comments.id) as total_comments'))
         ->leftJoin('comments', 'articles.id', '=', 'comments.article_id')
-        ->groupBy('articles.id','articles.title','short_description','image_url')
+        ->groupBy('articles.id','articles.title','short_description','image_url','articles.created_at')
         ->paginate(3);
         // ->get();
 
@@ -110,15 +110,15 @@ class CategoryController extends Controller
         ->groupBy('categories.id', 'categories.name')
         ->get();
        $query1 = DB::table('articles')
-    ->select('articles.id', 'articles.title', 'articles.short_description', DB::raw('COUNT(comments.id) as total_comments'))
+    ->select('articles.id','articles.image_url', 'articles.title','articles.created_at', 'articles.short_description', DB::raw('COUNT(comments.id) as total_comments'))
     ->leftJoin('comments', 'articles.id', '=', 'comments.article_id')
     ->where('category_id', $id)
-    ->groupBy('articles.id', 'articles.title', 'articles.short_description')
+    ->groupBy('articles.id', 'articles.title', 'articles.short_description','articles.image_url','articles.created_at')
     ->paginate(5);
 
     // dd(['data'=>$query1]);
 
-    return view('listbaiviet',
+    return view('categories',
          [
         'data' => $query,
         'data1' => $query1

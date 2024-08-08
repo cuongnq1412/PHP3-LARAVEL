@@ -21,13 +21,15 @@ class HomeController extends Controller
     $latest4Articles = $articles->slice(1, 3);
     $next5Articles = $articles->slice(4, 5);
 
-     $startOfWeek = Carbon::now()->startOfWeek();
-     $endOfWeek = Carbon::now()->endOfWeek();
+    //  $startOfWeek = Carbon::now()->startOfWeek();
+    //  $endOfWeek = Carbon::now()->endOfWeek();
+    $startOfLastWeek = Carbon::now()->subWeek()->startOfWeek();
+$endOfLastWeek = Carbon::now()->subWeek()->endOfWeek();
 
      $weeklyArticles = DB::table('articles')
          ->select('articles.*', 'categories.name as categories_name')
          ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-         ->whereBetween('articles.created_at', [$startOfWeek, $endOfWeek])
+         ->whereBetween('articles.created_at', [$startOfLastWeek, $endOfLastWeek])
          ->orderBy('articles.created_at', 'desc')
          ->where('status',1)
          ->limit(6)

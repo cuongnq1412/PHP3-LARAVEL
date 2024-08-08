@@ -29,7 +29,7 @@ Route::middleware(['checkuser'])->group(function(){
 
     Route::get('/',[HomeController::class, 'index'])->name('home');
     Route::get('/Categories',[CategoryController::class,'index']);
-    Route::get('/Categories/{id}',[CategoryController::class,'index']);
+    Route::get('/Categories/{id}',[CategoryController::class,'show']);
     Route::get('/Article_detail/{id}',[PostController::class,'show']);
     Route::get('/About_us',function(){
         return view('aboutUs');

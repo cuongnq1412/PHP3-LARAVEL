@@ -105,7 +105,7 @@ class PostController extends Controller
 
             return redirect()->back()->with('alert', [
                 'type' => 'error',
-                'message' => 'Có lỗi xảy ra khi tải lên ảnh: ' . $th->getMessage()
+                'message' => 'Có lỗi xảy ra: ' . $th->getMessage()
             ]);
 
             // dd($th);

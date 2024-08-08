@@ -12,15 +12,15 @@
                             <div class="blog_item_img">
                                 <img class="card-img rounded-0" src="{{ asset($item->image_url)}}" alt="">
                                 <a href="{{ url('Article_detail/'.$item->id) }}" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
+                                    <h3>{{ $item->created_at }}</h3>
+                                    {{-- <p>Jan</p> --}}
                                 </a>
                             </div>
 
                             <div class="blog_details">
                                 <a class="d-inline-block" href="{{ url('Article_detail/'.$item->id) }}">
                                     <h2>{{ $item->title }}</h2>
-                                </a>
+                                 </a>
                                 <p>{{ $item -> short_description }}</p>
                                 <ul class="blog-info-link">
                                     <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
@@ -59,22 +59,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                        <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
-                                        <div class="input-group-append">
-                                            <button class="btns" type="button"><i class="ti-search"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
-                            </form>
-                        </aside>
+
 
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Danh Mục</h4>
